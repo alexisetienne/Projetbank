@@ -7,9 +7,9 @@ public class TesteProjetBank {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		String driver = "org.mariadb.jdbc.Driver";
-		String url = "jdbc:mariadb://localhost:3306/projetbank"; 
+		String url = "jdbc:mariadb://localhost:3306/Projetbank"; 
 		String log = "root";
-		String pwd = "";
+		String pwd = "root";
 		
 		try {
 			Class.forName(driver); 

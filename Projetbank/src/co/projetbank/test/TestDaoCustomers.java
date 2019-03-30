@@ -1,6 +1,6 @@
 package co.projetbank.test;
 
-import co.projetbank.dao.CustomersDao;
+import co.projetbank.dao.CustomerDao;
 import co.simplon.dao.CustomerDao;
 
 public class TestDaoCustomers {
