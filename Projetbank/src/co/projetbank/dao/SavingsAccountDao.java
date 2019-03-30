@@ -5,21 +5,19 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import co.simplon.entities.Account;
+public class SavingsAccountDao extends Dao<SavingsAccount>{
 
-public class AccountDao extends T<Account> {
-	
 	@Override
-	public Account find(int id) {
-		String str = "select * from T_Accounts where IdCust=?";
+	public SavingsAccount find(int id) {
+		String str = "select * from T_SavingsAccount where IdCust=?";
 		PreparedStatement ps;
-		Account compte = null;
+		SavingsAccount compte = null;
 		try {
 			ps = connection.prepareStatement(str);
 			ps.setInt(1,id);
 			ResultSet resultSet = ps.executeQuery();
 			if(resultSet.next()){
-				compte = new Account(resultSet.getInt(1),resultSet.getDouble(2),resultSet.getDate(3));
+				compte = new SavingsAccount(resultSet.getInt(1),resultSet.getDate(2),resultSet.getDouble(3),resultSet.getInt(4));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -28,16 +26,16 @@ public class AccountDao extends T<Account> {
 	}
 
 	@Override
-	public boolean create(Account obj) {
-		String str = "INSERT INTO T_Accounts (NumAt,Balance,DateCreation) VALUES (?, ? ,?);";
+	public boolean create(SavingsAccount obj) {
+		String str = "INSERT INTO T_SavingsAccount (IdCust,DateCreation,Balance,InterestRate) VALUES (?, ? ,? ,?);";
 		PreparedStatement ps;
 		boolean ok = false;
 		try {
 			ps = connection.prepareStatement(str);
-			ps.setInt(1, obj.getNumAt());
-			ps.setDouble(2,obj.getBalance());
-			ps.setDate(3,(Date) obj.getDateCreation());
-			
+			ps.setInt(1, obj.getIdCust());
+			ps.setDate(2,(Date) obj.getDateCreation());
+			ps.setDouble(3,obj.getBalance());
+			ps.setInt(4, obj.getInterestRate());
 			ps.executeQuery();
 			ok = true;
 		} catch (SQLException e) {
@@ -47,14 +45,14 @@ public class AccountDao extends T<Account> {
 	}
 
 	@Override
-	public boolean update(Account obj) {		
-		String str = " update T_Accounts set Balance=? where NumAt=?;";		
+	public boolean update(SavingsAccount obj) {		
+		String str = " update T_SavingsAccount set Balance=? where IdCust=?;";		
 		PreparedStatement ps;
 		boolean ok = false;
 		try {
 			ps = connection.prepareStatement(str);
 			ps.setDouble(1,obj.getBalance());
-			ps.setInt(2,obj.getNumAt());
+			ps.setInt(2,obj.getIdCust());
 			int row = ps.executeUpdate();
 			if(row > 0)	ok = true;			
 		} catch (SQLException e) {
@@ -64,13 +62,13 @@ public class AccountDao extends T<Account> {
 	}
 
 	@Override
-	public boolean delete(Account obj) {
-		String str = "delete from T_Accounts where NumAt=?;";	
+	public boolean delete(SavingsAccount obj) {
+		String str = "delete from T_SavingsAccount where IdCust=?;";	
 		PreparedStatement ps;
 		boolean ok = false;
 		try {
 			ps = connection.prepareStatement(str);
-			ps.setInt(1,obj.getNumAt());
+			ps.setInt(1,obj.getIdCust());
 			int row = ps.executeUpdate();
 			if(row > 0)	ok = true;
 		} catch (SQLException e) {
@@ -78,5 +76,4 @@ public class AccountDao extends T<Account> {
 		}
 		return ok;
 	}
-
 }

@@ -1,13 +1,13 @@
 package co.projetbank.test;
 
-import co.projetbank.dao.AccountDao;
+import co.projetbank.dao.CurrentAccountDao;
 
 public class TestDaoAccount {
 	public static void runTests() {
 		java.util.Date date_util = new java.util.Date();
 		java.sql.Date date_sql = new java.sql.Date(date_util.getTime());
 
-		AccountDao ad = new AccountDao();		
+		CurrentAccountDao ad = new CurrentAccountDao();		
 		
 		Account a1 = new Account(date_sql,1000,6);
 		

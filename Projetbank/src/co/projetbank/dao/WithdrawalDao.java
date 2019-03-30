@@ -6,18 +6,18 @@ import java.sql.SQLException;
 
 import co.simplon.entities.Operation;
 
-public class OperationDao extends T<Operation>{
+public class WithdrawalDao extends T<Withdrawal>{
 	@Override
-	public Operation find(int id) {
+	public Withdrawal find(int id) {
 		String str = "select * from T_Operations where NumAOp=?";
 		PreparedStatement ps;
-		Operation compte = null;
+		Withdrawal compte = null;
 		try {
 			ps = connection.prepareStatement(str);
 			ps.setInt(1,id);
 			ResultSet resultSet = ps.executeQuery();
 			if(resultSet.next()){
-				compte = new Operation(resultSet.getInt(1),resultSet.getDate(2),resultSet.getDouble(3));
+				compte = new Withdrawal(resultSet.getInt(1),resultSet.getDate(2),resultSet.getDouble(3));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -26,15 +26,15 @@ public class OperationDao extends T<Operation>{
 	}
 
 	@Override
-	public boolean create(Operation obj) {
-		String str = "INSERT INTO T_Operations (NumOp,DateOp , Amount) VALUES (?, ? ,? );";
+	public boolean create(Withdrawal obj) {
+		String str = "INSERT INTO T_Withdrawal (NumOp,DateOp , Amount) VALUES (?, ? ,? );";
 		PreparedStatement ps;
 		boolean ok = false;
 		try {
 			ps = connection.prepareStatement(str);
 			ps.setInt(1, obj.getNumOp());
-			ps.setDate(2,obj.getAmount());
-			ps.setDouble(3, obj.getNumAt());
+			ps.setDate(2,obj.getDateOp());
+			ps.setDouble(3, obj.getAmount());
 			ps.executeQuery();
 			ok = true;
 		} catch (SQLException e) {
@@ -44,8 +44,8 @@ public class OperationDao extends T<Operation>{
 	}
 
 	@Override
-	public boolean update(Operation obj) {		
-		String str = " update T_Operations set Amount=? where NumOp=?;";		
+	public boolean update(Withdrawal obj) {		
+		String str = " update T_Withdrawal set Amount=? where NumOp=?;";		
 		PreparedStatement ps;
 		boolean ok = false;
 		try {
@@ -61,8 +61,8 @@ public class OperationDao extends T<Operation>{
 	}
 
 	@Override
-	public boolean delete(Operation obj) {
-		String str = "delete from T_Operations where NumOp=?;";	
+	public boolean delete(Withdrawal obj) {
+		String str = "delete from T_Withdrawal where NumOp=?;";	
 		PreparedStatement ps;
 		boolean ok = false;
 		try {
