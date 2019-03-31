@@ -1,12 +1,12 @@
 package co.projetbank.dao;
-
+import co.projetbank.entities.*;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import co.simplon.entities.Customer;
 
-public class CustomerDao extends T<Customer> {
+
+public class CustomerDao extends Dao<Customer> {
 	
 	@Override
 	public Customer find(int id) {

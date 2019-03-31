@@ -1,27 +1,28 @@
 package co.projetbank.dao;
 
 import java.sql.Date;
+
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import co.simplon.dao.CurrentAccount;
-import co.simplon.entities.Account;
 
-public class CurrentAccountDao extends T<CurrentAccount> {
+import co.projetbank.entities.CurrentAccount;
+
+public class CurrentAccountDao extends Dao<CurrentAccount> {
 	
 	
 	@Override
 	public CurrentAccount find(int id) {
 		String str = "select * from T_CurrentAccount where IdCust=?";
 		PreparedStatement ps;
-		Account compte = null;
+		CurrentAccount compte = null;
 		try {
 			ps = connection.prepareStatement(str);
 			ps.setInt(1,id);
 			ResultSet resultSet = ps.executeQuery();
 			if(resultSet.next()){
-				compte = new CurrentAccount(resultSet.getInt(1),resultSet.getDate(2),resultSet.getDouble(3),resultSet.getInt(4));
+				compte = new CurrentAccount(resultSet.getInt(1),resultSet.getDouble(2),resultSet.getDate(3),resultSet.getInt(4));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -31,7 +32,7 @@ public class CurrentAccountDao extends T<CurrentAccount> {
 
 	@Override
 	public boolean create(CurrentAccount obj) {
-		String str = "INSERT INTO T_CurrentAccount (IdCust,DateCreation,Balance,Overdraft) VALUES (?, ? ,? ,?);";
+		String str = "INSERT INTO T_CurrentAccount (IdCust,CreationDate,Balance,Overdraft) VALUES (?, ? ,? ,?);";
 		PreparedStatement ps;
 		boolean ok = false;
 		try {
@@ -39,7 +40,7 @@ public class CurrentAccountDao extends T<CurrentAccount> {
 			ps.setInt(1, obj.getIdCust());
 			ps.setDate(2,(Date) obj.getDateCreation());
 			ps.setDouble(3,obj.getBalance());
-			ps.setInt(4, obj.getOverdraft());
+			ps.setDouble(4, obj.getOverdraft());
 			ps.executeQuery();
 			ok = true;
 		} catch (SQLException e) {

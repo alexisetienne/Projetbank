@@ -31,8 +31,8 @@ private static Connection connection = null;
 			Class.forName(props.getProperty("jdbc.driver.class"));
 			connection = DriverManager.getConnection(url, log, pwd);
 			Statement statement = connection.createStatement();
-			statement.executeQuery("create database if not exists Bank;");
-			statement.executeQuery("use Bank;");
+			statement.executeQuery("create database if not exists Projetbank;");
+			statement.executeQuery("use Projetbank;");
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		} 				

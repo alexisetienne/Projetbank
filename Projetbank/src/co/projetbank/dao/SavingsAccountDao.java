@@ -1,5 +1,5 @@
 package co.projetbank.dao;
-
+import co.projetbank.entities.*;
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -17,7 +17,7 @@ public class SavingsAccountDao extends Dao<SavingsAccount>{
 			ps.setInt(1,id);
 			ResultSet resultSet = ps.executeQuery();
 			if(resultSet.next()){
-				compte = new SavingsAccount(resultSet.getInt(1),resultSet.getDate(2),resultSet.getDouble(3),resultSet.getInt(4));
+				compte = new SavingsAccount(resultSet.getInt(1),resultSet.getDouble(2),resultSet.getDate(3),resultSet.getInt(4));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -27,15 +27,15 @@ public class SavingsAccountDao extends Dao<SavingsAccount>{
 
 	@Override
 	public boolean create(SavingsAccount obj) {
-		String str = "INSERT INTO T_SavingsAccount (IdCust,DateCreation,Balance,InterestRate) VALUES (?, ? ,? ,?);";
+		String str = "INSERT INTO T_SavingsAccount (IdCust,Balance,CreationDate,InterestRate) VALUES (?, ? ,? ,?);";
 		PreparedStatement ps;
 		boolean ok = false;
 		try {
 			ps = connection.prepareStatement(str);
 			ps.setInt(1, obj.getIdCust());
-			ps.setDate(2,(Date) obj.getDateCreation());
-			ps.setDouble(3,obj.getBalance());
-			ps.setInt(4, obj.getInterestRate());
+			ps.setDouble(2,obj.getBalance());
+			ps.setDate(3,(Date) obj.getDateCreation());
+			ps.setDouble(4, obj.getInterestRate());
 			ps.executeQuery();
 			ok = true;
 		} catch (SQLException e) {

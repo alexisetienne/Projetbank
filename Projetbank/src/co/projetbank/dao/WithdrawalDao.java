@@ -1,15 +1,17 @@
 package co.projetbank.dao;
+import co.projetbank.entities.*;
 
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import co.simplon.entities.Operation;
 
-public class WithdrawalDao extends T<Withdrawal>{
+
+public class WithdrawalDao extends Dao<Withdrawal>{
 	@Override
 	public Withdrawal find(int id) {
-		String str = "select * from T_Operations where NumAOp=?";
+		String str = "select * from T_Withdrawal where NumOp=?";
 		PreparedStatement ps;
 		Withdrawal compte = null;
 		try {
@@ -33,7 +35,7 @@ public class WithdrawalDao extends T<Withdrawal>{
 		try {
 			ps = connection.prepareStatement(str);
 			ps.setInt(1, obj.getNumOp());
-			ps.setDate(2,obj.getDateOp());
+			ps.setDate(2,(Date) obj.getDateOp());
 			ps.setDouble(3, obj.getAmount());
 			ps.executeQuery();
 			ok = true;

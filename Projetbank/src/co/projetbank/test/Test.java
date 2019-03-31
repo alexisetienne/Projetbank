@@ -5,25 +5,25 @@ public class Test {
 		// TODO Auto-generated method stub
 		TestDaoCustomers.runTests();
 		System.out.println("\n\n");
-		
+		/*
 		TestDaoAccount.runTests();
 		System.out.println("\n\n");
+		 */
 
 		TestDaoSavingAccount.runTests();
 		System.out.println("\n\n");
-		
 		TestDaoCurrentAccount.runTests();
 		System.out.println("\n\n");
 		
-		TestDaoSavingOperation.runTests();
+		/*TestDaoSavingOperation.runTests();
 		System.out.println("\n\n");
+		 */
 		
 		TestDaoWithdrawal.runTests();
 		System.out.println("\n\n");
 		
 		TestDaoPayment.runTests();
 		System.out.println("\n\n");
-		
 	}
 
 }

@@ -1,5 +1,7 @@
 package co.projetbank.dao;
+import co.projetbank.entities.*;
 
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -8,7 +10,7 @@ public class PaymentDao extends Dao<Payment> {
 	
 	@Override
 	public Payment find(int id) {
-		String str = "select * from T_Payment where NumAOp=?";
+		String str = "select * from T_Payment where NumOp=?";
 		PreparedStatement ps;
 		Payment compte = null;
 		try {
@@ -32,7 +34,7 @@ public class PaymentDao extends Dao<Payment> {
 		try {
 			ps = connection.prepareStatement(str);
 			ps.setInt(1, obj.getNumOp());
-			ps.setDate(2,obj.getDateOp());
+			ps.setDate(2,(Date) obj.getDateOp());
 			ps.setDouble(3, obj.getAmount());
 			ps.executeQuery();
 			ok = true;
@@ -61,7 +63,7 @@ public class PaymentDao extends Dao<Payment> {
 
 	@Override
 	public boolean delete(Payment obj) {
-		String str = "delete from T_Paymentl where NumOp=?;";	
+		String str = "delete from T_Payment where NumOp=?;";	
 		PreparedStatement ps;
 		boolean ok = false;
 		try {
