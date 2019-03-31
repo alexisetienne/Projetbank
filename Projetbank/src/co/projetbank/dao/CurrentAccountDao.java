@@ -1,14 +1,12 @@
 package co.projetbank.dao;
-
+import co.projetbank.entities.*;
 import java.sql.Date;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-
-import co.projetbank.entities.CurrentAccount;
-
+import co.projetbank.entities.*;
 public class CurrentAccountDao extends Dao<CurrentAccount> {
 	
 	
@@ -22,7 +20,7 @@ public class CurrentAccountDao extends Dao<CurrentAccount> {
 			ps.setInt(1,id);
 			ResultSet resultSet = ps.executeQuery();
 			if(resultSet.next()){
-				compte = new CurrentAccount(resultSet.getInt(1),resultSet.getDouble(2),resultSet.getDate(3),resultSet.getInt(4));
+				compte = new CurrentAccount(resultSet.getInt(1),resultSet.getDouble(2),resultSet.getDate(3),resultSet.getDouble(4),(Customer) resultSet.getObject(5));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -41,6 +39,7 @@ public class CurrentAccountDao extends Dao<CurrentAccount> {
 			ps.setDate(2,(Date) obj.getDateCreation());
 			ps.setDouble(3,obj.getBalance());
 			ps.setDouble(4, obj.getOverdraft());
+			
 			ps.executeQuery();
 			ok = true;
 		} catch (SQLException e) {

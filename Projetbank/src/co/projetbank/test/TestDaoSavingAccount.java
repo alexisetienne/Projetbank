@@ -2,6 +2,7 @@ package co.projetbank.test;
 
 import co.projetbank.dao.CurrentAccountDao;
 import co.projetbank.dao.*;
+import co.projetbank.entities.Customer;
 import co.projetbank.entities.SavingsAccount;
 
 public class TestDaoSavingAccount {
@@ -9,8 +10,9 @@ public class TestDaoSavingAccount {
 		java.util.Date date_util = new java.util.Date();
 		java.sql.Date date_sql = new java.sql.Date(date_util.getTime());
 		SavingsAccountDao sd = new SavingsAccountDao();
+		Customer c3 = new Customer(1,"artur");
 		
-		SavingsAccount s1 = new SavingsAccount(10,1200,date_sql,10);
+		SavingsAccount s1 = new SavingsAccount(10,1200,date_sql,10, c3);
 
 		
 		

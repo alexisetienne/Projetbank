@@ -17,7 +17,7 @@ public class SavingsAccountDao extends Dao<SavingsAccount>{
 			ps.setInt(1,id);
 			ResultSet resultSet = ps.executeQuery();
 			if(resultSet.next()){
-				compte = new SavingsAccount(resultSet.getInt(1),resultSet.getDouble(2),resultSet.getDate(3),resultSet.getInt(4));
+				compte = new SavingsAccount(resultSet.getInt(1),resultSet.getDouble(2),resultSet.getDate(3),resultSet.getInt(4), (Customer) resultSet.getObject(5));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();

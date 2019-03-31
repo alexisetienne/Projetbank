@@ -1,6 +1,6 @@
 package co.projetbank.entities;
 
-public class Customer {
+public  class Customer {
 	
 	private int IdCust;
 	private String Name;
@@ -12,7 +12,7 @@ public class Customer {
 	}
 	@Override
 	public String toString() {
-		return "customers [Customer number=" + IdCust + ",Customer Name=" + Name +"]";
+		return "[Customer number=" + IdCust + ",Customer Name=" + Name +"]";
 	}
 	public int getIdCust() {
 		return IdCust;

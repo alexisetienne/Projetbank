@@ -3,20 +3,21 @@ package co.projetbank.entities;
 
 import java.util.Date;
 
-public  class Account {
+public abstract class Account {
 	private int IdCust ; 
 	private double Balance;
 	private Date DateCreation;
+	 
 	
 	public Account(int IdCust ,double balance, Date dateCreation) {
 		this.DateCreation = dateCreation;
 		this.Balance = balance ; 
 		this.IdCust =IdCust;
-		
+				
 	}
 	@Override
 	public String toString() {
-		return " Creation Date = " + DateCreation + ",Balance=" + Balance+",Customer number = "+IdCust+", ";
+		return " Creation Date = " + DateCreation + ",Balance=" + Balance+",Customer number = "+IdCust;
 	}
 	public Date getDateCreation() {
 		return DateCreation;
@@ -39,5 +40,6 @@ public  class Account {
 	public void setIdCust(int IdCust) {
 		this.IdCust = IdCust;
 	}
+
 		
 }
