@@ -3,7 +3,7 @@ package co.projetbank.entities;
 
 import java.util.Date;
 
-public abstract class Account {
+public  class Account {
 	private int IdCust ; 
 	private double Balance;
 	private Date DateCreation;

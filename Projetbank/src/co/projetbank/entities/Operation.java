@@ -2,7 +2,7 @@ package co.projetbank.entities;
 
 import java.util.Date;
 
-public abstract class Operation {
+public  class Operation {
 	
 	private int NumOp;
 	private Date DateOp ;

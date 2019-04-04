@@ -1,6 +1,5 @@
 package co.projetbank.test;
 
-import co.projetbank.dao.CurrentAccountDao;
 import co.projetbank.dao.*;
 import co.projetbank.entities.Customer;
 import co.projetbank.entities.SavingsAccount;
