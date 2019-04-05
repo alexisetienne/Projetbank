@@ -34,8 +34,8 @@ public class AccountDao extends Dao<Account> {
 		try {
 			ps = connection.prepareStatement(str);
 			ps.setInt(1, obj.getIdCust());
-			ps.setDate(2,(Date) obj.getDateCreation());
-			ps.setDouble(3,obj.getBalance());
+			ps.setDouble(2,obj.getBalance());
+			ps.setDate(3,(Date) obj.getDateCreation());
 			
 			ps.executeQuery();
 			ok = true;

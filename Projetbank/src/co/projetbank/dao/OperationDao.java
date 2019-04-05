@@ -1,23 +1,25 @@
 package co.projetbank.dao;
-import co.projetbank.entities.*;
+
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class SavingsAccountDao extends Dao<SavingsAccount>{
+import co.projetbank.entities.Account;
+import co.projetbank.entities.Operation;
 
+public class OperationDao extends Dao<Operation>{
 	@Override
-	public SavingsAccount find(int id) {
-		String str = "select * from T_SavingsAccount where IdCust=?";
+	public Operation find(int id) {
+		String str = "select * from T_Operation where NumOp=?";
 		PreparedStatement ps;
-		SavingsAccount compte = null;
+		Operation compte = null;
 		try {
 			ps = connection.prepareStatement(str);
 			ps.setInt(1,id);
 			ResultSet resultSet = ps.executeQuery();
 			if(resultSet.next()){
-				compte = new SavingsAccount(resultSet.getInt(1),resultSet.getDouble(2),resultSet.getDate(3),resultSet.getInt(4), (Customer) resultSet.getObject(5));
+				compte = new Operation(resultSet.getInt(1),resultSet.getDate(2),resultSet.getDouble(3));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -26,16 +28,16 @@ public class SavingsAccountDao extends Dao<SavingsAccount>{
 	}
 
 	@Override
-	public boolean create(SavingsAccount obj) {
-		String str = "INSERT INTO T_SavingsAccount (IdCust,Balance,CreationDate,InterestRate) VALUES (?, ? ,? ,?);";
+	public boolean create(Operation obj) {
+		String str = "INSERT INTO T_Operation (NumOp,DateOp,Amount) VALUES (?, ? ,? );";
 		PreparedStatement ps;
 		boolean ok = false;
 		try {
 			ps = connection.prepareStatement(str);
-			ps.setInt(1, obj.getIdCust());
-			ps.setDouble(2,obj.getBalance());
-			ps.setDate(3,(Date) obj.getDateCreation());
-			ps.setDouble(4, obj.getInterestRate());
+			ps.setInt(1, obj.getNumOp());
+			ps.setDate(2,(Date) obj.getDateOp());
+			ps.setDouble(3,obj.getAmount());
+			
 			ps.executeQuery();
 			ok = true;
 		} catch (SQLException e) {
@@ -45,14 +47,14 @@ public class SavingsAccountDao extends Dao<SavingsAccount>{
 	}
 
 	@Override
-	public boolean update(SavingsAccount obj) {		
-		String str = " update T_SavingsAccount set Balance=? where IdCust=?;";		
+	public boolean update(Operation obj) {		
+		String str = " update T_Operation set Amount=? where NumOp=?;";		
 		PreparedStatement ps;
 		boolean ok = false;
 		try {
 			ps = connection.prepareStatement(str);
-			ps.setDouble(1,obj.getBalance());
-			ps.setInt(2,obj.getIdCust());
+			ps.setDouble(1,obj.getAmount());
+			ps.setInt(2,obj.getNumOp());
 			int row = ps.executeUpdate();
 			if(row > 0)	ok = true;			
 		} catch (SQLException e) {
@@ -62,13 +64,13 @@ public class SavingsAccountDao extends Dao<SavingsAccount>{
 	}
 
 	@Override
-	public boolean delete(SavingsAccount obj) {
-		String str = "delete from T_SavingsAccount where IdCust=?;";	
+	public boolean delete(Operation obj) {
+		String str = "delete from T_Operation where NumOp=?;";	
 		PreparedStatement ps;
 		boolean ok = false;
 		try {
 			ps = connection.prepareStatement(str);
-			ps.setInt(1,obj.getIdCust());
+			ps.setInt(1,obj.getNumOp());
 			int row = ps.executeUpdate();
 			if(row > 0)	ok = true;
 		} catch (SQLException e) {

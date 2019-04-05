@@ -10,20 +10,17 @@ public class Test {
 		System.out.println("\n\n");
 		 */
 
-		TestDaoSavingAccount.runTests();
-		System.out.println("\n\n");
-		TestDaoCurrentAccount.runTests();
+		TestDaoAccount.runTests();
 		System.out.println("\n\n");
 		
 		/*TestDaoSavingOperation.runTests();
 		System.out.println("\n\n");
 		 */
 		
-		TestDaoWithdrawal.runTests();
+		TestDaoOperation.runTests();
 		System.out.println("\n\n");
 		
-		TestDaoPayment.runTests();
-		System.out.println("\n\n");
+		
 	}
 
 }
